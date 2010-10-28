@@ -1,0 +1,30 @@
+# use ansi color (0 = no, 1 = yes)
+color: 1
+
+# run in debug mode (0 = no, 1 = yes)
+debug: 0
+
+# how long (in seconds) to sleep between frames
+frame_delay: 0.2
+
+# City / City, State / City, Country / Country
+location: Darmstadt, Germany
+
+# how often (in seconds) to attempt to retrieve weather data
+retr_interval: 600
+
+# how to display temperatures ( metric, standard or both )
+temp_display: metric
+
+# timezone to use instead of your own
+# timezone: 
+
+# how long (in seconds) trees should live
+tree_lifespan: 3600
+
+# the version of weatherspect this config was generated with
+version: 1.8
+
+# how to display wind speeds ( metric, standard or both )
+wind_display: metric
+
