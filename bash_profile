@@ -19,7 +19,7 @@ export HISTIGNORE="ls:cd:[bf]g:exit" # Ignore ls, cd, exit, etc.
 export HISTCONTROL="ignoreboth"      # Ignore lines which begin with a space character and duplicate lines
 bind 'set match-hidden-files off'    # if you cd [tab][tab], no hidden files will be recommended. Only if you cd .[tab][tab]
 
-alias cds="cd;clear"
+alias cds="cd;clear;ls;"
 
 # Check directories and add existing to $PATH
   for dir in \
