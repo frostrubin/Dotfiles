@@ -4,7 +4,7 @@ export EDITOR=nano
 # set the promt
 PS1='\u@\h \W `test $? -eq 0 && echo "\[\e[0;32m:)\e[0m\]" || echo "\[\e[0;31m:(\e[0m\]" ` \[\e[0;33m⚡\e[0m\] '
 
-stty columns 175   # Together with the functions below, this sets the terminal width and truncates long lines.
+stty columns 170   # Together with the functions below, this sets the terminal width and truncates long lines.
 function ...() {
    local -i n;
    let n=$(tput cols)/2-3;
