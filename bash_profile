@@ -100,6 +100,8 @@ alias grep='grep --color=auto'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 # Short Alias for the function defined above
 alias m2='man2pdfnew'
+# Very simple stopwatch funtionality
+alias stopwatch='echo "Terminal is in stopwatch mode. Hit ctrl+C to stop tracking the time."; time cat'
 
 
 # show a greeter on startup
