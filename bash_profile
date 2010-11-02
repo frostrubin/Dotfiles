@@ -127,11 +127,16 @@ ScreenShots:
 
 Keyboard Navigation:
 ⌃ F1         # Keyboard Navigation On/Off
-⌃ F2         # Select Menubar
+⌃ F2         # Select Menubar (left)
 ⌃ F3         # Select Dock
+⌃ F8         # Select Menubar (right)
 ⌘ ⇥          # Next application
 ⌘ ⇧ ⇥        # Previous application
+⌘ ⇧ .        # In open/save dialogs: show hidden files 
 
+Exposé:
+If all windows of one application are displayed,
+   ⇥ brings you to the next application.
 END
 }
 
