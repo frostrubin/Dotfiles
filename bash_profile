@@ -118,6 +118,23 @@ on a paticular command.
 END
 }
 
+keyboard(){ # Selection of keyboard shortcuts to make it easier to remember them
+    \less  <<END
+ScreenShots:
+⌘ ⇧ 3        # Whole Screen
+⌘ ⇧ 4        # Selection
+⌘ ⇧ 4 + ␣    # Specific Window  
+
+Keyboard Navigation:
+⌃ F1         # Keyboard Navigation On/Off
+⌃ F2         # Select Menubar
+⌃ F3         # Select Dock
+⌘ ⇥          # Next application
+⌘ ⇧ ⇥        # Previous application
+
+END
+}
+
 # color the ls output
 alias ls='ls -G'
 # shortcut for detailed listing
