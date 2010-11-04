@@ -26,6 +26,7 @@ alias cds="cd;clear;ls;"
           ~/Scripts \
           ~/.functions/ \
           ~/.functions/mupdf05 \
+          ~/.functions/ImageMagick-6.6.4/bin \
 #          /usr/bin \
 	  do
 	  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
