@@ -107,18 +107,18 @@ shopt -s cdable_vars # set the bash option so that no '$' is required when using
   #copies folder and all sub files and folders, preserving security and dates
   alias cp_folder="cp -Rpv" 
   
-  
-
-
 
 # Prompt
-PS1='\W `test $? -eq 0 && echo -e ${COLOR_GREEN}:\)${COLOR_NC} || echo -e ${COLOR_RED}:\(${COLOR_NC}` '
-#`echo -e  ${COLOR_YELLOW}⚡${COLOR_NC}` '
+  # The \[ and \] brackets around the colors are very important!
+  # Not for the actual color display (it works without them) but for the terminal.app
+  # to know that colors are being printed.
+  # Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
+  PS1='\W `test $? -eq 0 && echo -e \[${COLOR_GREEN}\]:\)\[${COLOR_NC}\] || echo -e \[${COLOR_RED}\]:\(\[${COLOR_NC}\]` '
+  #`echo -e  ${COLOR_YELLOW}⚡${COLOR_NC}` '
 
-# Together with shopt histappend, this makes the bash history available
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+  # Together with shopt histappend, this makes the bash history available
+  export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# Terminal Window
 
 
 # OS X Specific ------------------------------------
