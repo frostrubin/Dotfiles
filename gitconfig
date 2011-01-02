@@ -1,0 +1,6 @@
+[user]
+	name = Daniel Rodenburg
+	email = daniel@example.com
+
+[core]
+        excludesfile = /Users/bernhard/.gitignore
