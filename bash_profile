@@ -13,7 +13,7 @@ export COLOR_LIGHT_RED='\033[1;31m'
 export COLOR_PURPLE='\033[0;35m'
 export COLOR_LIGHT_PURPLE='\033[1;35m'
 export COLOR_BROWN='\033[0;33m'
-export COLOR_YELLOW='\033[1;33m'
+export COLOR_YELLOW='\033[0;33m'
 export COLOR_GRAY='\033[1;30m'
 export COLOR_LIGHT_GRAY='\033[0;37m'
 

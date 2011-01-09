@@ -72,6 +72,10 @@ function pdfcleandir () {
    IFS=$SAVEIFS
 }
 
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
 # I got the following from, and mod'd it: http://www.macosxhints.com/article.php?story=20020716005123797
 #    The following aliases (save & show) are for saving frequently used directories
 #    You can save a directory using an abbreviation of your choosing. Eg. save ms
@@ -113,7 +117,10 @@ shopt -s cdable_vars # set the bash option so that no '$' is required when using
   # Not for the actual color display (it works without them) but for the terminal.app
   # to know that colors are being printed.
   # Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
-  PS1='\W `test $? -eq 0 && echo -e \[${COLOR_GREEN}\]:\)\[${COLOR_NC}\] || echo -e \[${COLOR_RED}\]:\(\[${COLOR_NC}\]` '
+  #status=$? #This is done, because parse_git_branch changes the $? variable.
+  #`echo -e \[${COLOR_YELLOW}\]$(parse_git_branch)\[${COLOR_NC}\]`
+  PS1='\W \
+`test $? -eq 0 && echo -e \[${COLOR_GREEN}\]:\)\[${COLOR_NC}\] || echo -e \[${COLOR_RED}\]:\(\[${COLOR_NC}\]` '
   #`echo -e  ${COLOR_YELLOW}⚡${COLOR_NC}` '
 
   # Together with shopt histappend, this makes the bash history available
