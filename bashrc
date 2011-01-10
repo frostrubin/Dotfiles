@@ -73,7 +73,10 @@ function pdfcleandir () {
 }
 
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+  currentbranch=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ ${#currentbranch} -gt 0 ];then
+    echo -ne "$currentbranch "
+  fi
 }
 
 # I got the following from, and mod'd it: http://www.macosxhints.com/article.php?story=20020716005123797
@@ -112,20 +115,26 @@ shopt -s cdable_vars # set the bash option so that no '$' is required when using
   alias cp_folder="cp -Rpv" 
   
 
-# Prompt
+# Prompt with current git branch
   # The \[ and \] brackets around the colors are very important!
   # Not for the actual color display (it works without them) but for the terminal.app
   # to know that colors are being printed.
   # Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
-  #status=$? #This is done, because parse_git_branch changes the $? variable.
-  #`echo -e \[${COLOR_YELLOW}\]$(parse_git_branch)\[${COLOR_NC}\]`
-  PS1='\W \
-`test $? -eq 0 && echo -e \[${COLOR_GREEN}\]:\)\[${COLOR_NC}\] || echo -e \[${COLOR_RED}\]:\(\[${COLOR_NC}\]` '
-  #`echo -e  ${COLOR_YELLOW}⚡${COLOR_NC}` '
+  long_prompt='$(status=$?;
+  echo -ne "\[${COLOR_BLUE}\]";
+  parse_git_branch;
+  echo -ne "\[${COLOR_NC}\]";
+  if [[ $status = 0 ]]; then 
+    echo -ne "\[${COLOR_GREEN}\]:)"; 
+  else 
+    echo -ne "\[${COLOR_RED}\]:("; 
+  fi;
+  echo -ne "\[${COLOR_NC}\]";)'
+
+  PS1="\W $long_prompt "
 
   # Together with shopt histappend, this makes the bash history available
   export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
 
 
 # OS X Specific ------------------------------------
