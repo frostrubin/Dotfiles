@@ -105,7 +105,7 @@ shopt -s cdable_vars # set the bash option so that no '$' is required when using
   # Very simple stopwatch funtionality
   alias stopwatch='echo "Terminal is in stopwatch mode. Hit ctrl+C to stop tracking the time."; time cat'
   # Lists folders and files sizes in the current folder
-  alias ducks='du -cksh * | sort -rn|head -11' 
+  alias ducks='du -cksh *' 
   # Shows most used commands, 
   #cool script I got this from: http://lifehacker.com/software/how-to/turbocharge-your-terminal-274317.php
   alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
