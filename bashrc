@@ -37,7 +37,9 @@ export EDITOR=nano
   bind "set bell-style none"
   # After each command, checks the windows size and changes lines and columns
   shopt -s checkwinsize 
-  
+
+# Create a small gollum server
+gollum --port 43879 --host 127.0.0.1 /pub/Scripts/command_wiki/ > /dev/null 2>&1 &
 
 # Functions
 hf(){ 
@@ -90,7 +92,7 @@ fi
 
 alias show='cat ~/.dirs'
 save (){
-  command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"=\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
+  command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"'='\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
 }  #"
 source ~/.dirs  # Initialization for the above 'save' facility: source the .sdirs file 
 shopt -s cdable_vars # set the bash option so that no '$' is required when using the above facility
@@ -156,11 +158,10 @@ function create () {   # Easier script creation
      chmod +x $1
      if [ "${1#*.}" == "sh" ];then
        echo "#!/bin/bash" >> $1
-       open -a "MacVim" $1
      elif [ "${1#*.}" == "html" ] || [ "${1#*.}" == "htm" ];then
        echo -e '<html>\n<head>\n<style type="text/css">\n\n</style>\n</head>\n<body>\n\n</body>\n</html>' >> $1
-       open -a "MacVim" $1
      fi
+     open "$1"
    fi
 }
 
@@ -216,36 +217,21 @@ Keyboard Navigation:
 
 Exposé:
 If all windows of one application are displayed,
-   ⇥ brings you to the next application.
+⇥ brings you to the next application.
 END
 }
 
 
 # Aliases
-  # color the ls output
-  alias ls='ls -G'
-  # shortcut for detailed listing
-  alias ll='ls -GFlash'
-  # better less
-  alias less='less -IR'
-  # The Tree Command for Mac
-  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-  # Short Alias for the function defined above
-  alias m2='man2pdfnew'
-  # Sort top by CPU
-  alias top='top -o cpu'
-
-
-# set the promt
-#PS1='\u@\h \W `test $? -eq 0 && echo "\[\e[0;32m:)\e[0m\]" || echo "\[\e[0;31m:(\e[0m\]" ` \[\e[0;33m⚡\e[0m\] '
-
-#stty columns 170   # Together with the functions below, this sets the terminal width and truncates long lines.
-#function ...() {
-#   local -i n;
-#   let n=$(tput cols)/2-3;
-#   sed -re "s/^(.{$n}).*(.{$n})$/\1 ... \2/"
-#}
-
-
-
-
+# color the ls output
+alias ls='ls -G'
+# shortcut for detailed listing
+alias ll='ls -GFlash'
+# better less
+alias less='less -IR'
+# The Tree Command for Mac
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+# Short Alias for the function defined above
+alias m2='man2pdfnew'
+# Sort top by CPU
+alias top='top -o cpu'

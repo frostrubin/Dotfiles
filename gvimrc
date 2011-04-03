@@ -19,7 +19,7 @@ set ai
 set lbr!
 
 " Show tabs and trailing characters.
-set listchars=tab:»·,trail:·
+set listchars=tab:¬ª¬∑,trail:¬∑
 set list
 
 " Delete trailing white space and Dos-returns and to expand tabs to spaces.
