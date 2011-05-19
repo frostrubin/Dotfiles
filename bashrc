@@ -39,7 +39,7 @@ export EDITOR=nano
   shopt -s checkwinsize 
 
 # Create a small gollum server
-gollum --port 43879 --host 127.0.0.1 /pub/Scripts/command_wiki/ > /dev/null 2>&1 &
+#gollum --port 43879 --host 127.0.0.1 /pub/Scripts/command_wiki/ > /dev/null 2>&1 &
 
 # Functions
 hf(){ 
@@ -67,7 +67,7 @@ function pdfcleandir () {
       echo Versuche "$i" zu entsichern
       pdfclean "$i" ${i%\.*}_entsichert.pdf
       if [ "$1" == "-d" ];then
-         echo Versuche Original zu l√∂schen
+         echo Versuche Original zu löschen
          rm -f "$i"
       fi
    done
