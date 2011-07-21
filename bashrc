@@ -81,24 +81,6 @@ function parse_git_branch {
   fi
 }
 
-# I got the following from, and mod'd it: http://www.macosxhints.com/article.php?story=20020716005123797
-#    The following aliases (save & show) are for saving frequently used directories
-#    You can save a directory using an abbreviation of your choosing. Eg. save ms
-#    You can subsequently move to one of the saved directories by using cd with
-#    the abbreviation you chose. Eg. cd ms  (Note that no '$' is necessary.)
-if [ ! -f ~/.dirs ]; then  # if doesn't exist, create it
-  touch ~/.dirs
-fi
-
-alias show='cat ~/.dirs'
-save (){
-  command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"'='\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
-}  #"
-source ~/.dirs  # Initialization for the above 'save' facility: source the .sdirs file 
-shopt -s cdable_vars # set the bash option so that no '$' is required when using the above facility
-
-
-
 
 # Aliases
   alias cds="cd;clear;ls;"
@@ -142,13 +124,13 @@ shopt -s cdable_vars # set the bash option so that no '$' is required when using
 # OS X Specific ------------------------------------
 
 # Functions
-function man2pdfnew () { # Output man as pdf
-   if [ ! $(echo $(man -w "$1" 2>&1) | grep -c "No manual entry for") -ge "1" ]; then
-  	   man -t $* | ps2pdf - - 2>&1| open -g -f -a preview
-   else
-	   echo "No manual entry for" "$1"
-   fi
-}
+#function man2pdfnew () { # Output man as pdf
+#   if [ ! $(echo $(man -w "$1" 2>&1) | grep -c "No manual entry for") -ge "1" ]; then
+#  	   groff -mandoc `man -w $1`|open -f -a Preview
+#   else
+#	   echo "No manual entry for" "$1"
+#   fi
+#}
 
 function create () {   # Easier script creation
    if [ "$1" == "" ]; then
@@ -199,28 +181,6 @@ on a paticular command.
 END
 }
 
-keyboard(){ # Selection of keyboard shortcuts to make it easier to remember them
-    \less  <<END
-ScreenShots:
-⌘ ⇧ 3        # Whole Screen
-⌘ ⇧ 4        # Selection
-⌘ ⇧ 4 + ␣    # Specific Window  
-
-Keyboard Navigation:
-⌃ F1         # Keyboard Navigation On/Off
-⌃ F2         # Select Menubar (left)
-⌃ F3         # Select Dock
-⌃ F8         # Select Menubar (right)
-⌘ ⇥          # Next application
-⌘ ⇧ ⇥        # Previous application
-⌘ ⇧ .        # In open/save dialogs: show hidden files 
-
-Exposé:
-If all windows of one application are displayed,
-⇥ brings you to the next application.
-END
-}
-
 
 # Aliases
 # color the ls output
@@ -232,6 +192,6 @@ alias less='less -IR'
 # The Tree Command for Mac
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 # Short Alias for the function defined above
-alias m2='man2pdfnew'
+#alias m2='man2pdfnew'
 # Sort top by CPU
 alias top='top -o cpu'
