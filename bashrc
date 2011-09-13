@@ -50,6 +50,10 @@ function octal () {   # ls with permissions in octal from
    ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
+function pythonserver() {
+  python -m SimpleHTTPServer 8080
+}
+
 function cd () { # Far superior cd. cd ........ is possible
    local -ri n=${#*};
    if [ $n -eq 0 -o -d "${!n}" -o "${!n}" == "-" ]; then
@@ -73,6 +77,23 @@ function pdfcleandir () {
    done
    IFS=$SAVEIFS
 }
+
+function hidehomedirs () {
+  for i in $(ls ~);do
+    var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store|wc -l`
+    var="${var#"${var%%[![:space:]]*}"}"
+    var="${var%"${var##*[![:space:]]}"}"
+    
+    if [ $var -eq 1 ] || [ "$i" == "Library" ];then
+      chflags hidden ~/"$i"
+    else
+      chflags nohidden ~/"$i"
+    fi
+  done
+}
+
+# And run it directly
+hidehomedirs
 
 function parse_git_branch {
   currentbranch=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
