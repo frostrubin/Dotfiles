@@ -78,6 +78,17 @@ function pdfcleandir () {
    IFS=$SAVEIFS
 }
 
+function removeipodphotocache () {
+  var=`find ~/Pictures/iPod\ Photo\ Cache/ -not -name .DS_Store|wc -l`
+  var="${var#"${var%%[![:space:]]*}"}"
+  var="${var%"${var##*[![:space:]]}"}"  
+
+  if [ $var -eq 1 ];then
+    rmdir ~/Pictures/iPod\ Photo\ Cache/
+  fi
+}
+removeipodphotocache
+
 function hidehomedirs () {
   for i in $(ls ~);do
     var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store|wc -l`
