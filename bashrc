@@ -98,6 +98,15 @@ function openon () {   # Show open files on a Volume, that prevent it form umoun
   lsof +D "$1" 2>/dev/null
 }
 
+function ppdirs () { # Copy Folder Structure from external drive
+  if [ -d /Volumes/GoFlex/zerone ]; then
+    echo "Creating ppdirlist"
+    rsync -a -f"+ */" -f"- *" /Volumes/GoFlex ~/Desktop/ppdirs/
+  else
+    echo "Doing nothing"
+  fi
+}
+
 tips(){ # Selection of bash tips to make it easier to remember them
 \less  <<END
 Completion:
