@@ -182,7 +182,7 @@ function removeipodphotocache () {
 
 function hidehomedirs () {
   for i in $(ls ~);do
-    var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store|wc -l`
+    var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats|wc -l`
     var="${var#"${var%%[![:space:]]*}"}"
     var="${var%"${var##*[![:space:]]}"}"
 
