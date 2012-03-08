@@ -99,7 +99,7 @@ function openon () {   # Show open files on a Volume, that prevent it form umoun
 }
 
 function ppdirs () { # Copy Folder Structure from external drive
-  if [ -d /Volumes/GoFlex/zerone ]; then
+  if [ -d /Volumes/GoFlex ]; then
     echo "Creating ppdirlist"
     rsync -a -f"+ */" -f"- *" /Volumes/GoFlex ~/Desktop/ppdirs/
   else
@@ -169,17 +169,6 @@ function parse_git_branch {
 
 
 ### Mac Specific Functions ###
-function removeipodphotocache () {
-  mkdir ~/Pictures/iPod\ Photo\ Cache > /dev/null 2>&1
-  var=`find ~/Pictures/iPod\ Photo\ Cache/ -not -name .DS_Store|wc -l`
-  var="${var#"${var%%[![:space:]]*}"}"
-  var="${var%"${var##*[![:space:]]}"}"  
-
-  if [ $var -eq 1 ];then
-    rmdir ~/Pictures/iPod\ Photo\ Cache/
-  fi
-}
-
 function hidehomedirs () {
   for i in $(ls ~);do
     var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats|wc -l`
@@ -209,7 +198,7 @@ function hidepublicfolder () {
 }
 
 # And run it directly
-removeipodphotocache
+mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
 hidehomedirs
 hidepublicfolder
 
