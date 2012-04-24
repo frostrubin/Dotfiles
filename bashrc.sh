@@ -71,6 +71,14 @@ function pdfcleandir () {
    IFS=$SAVEIFS
 }
 
+function encrypt () {
+  openssl aes-256-cbc -a -in "$1" -out "$1".aes256cbc  
+}
+
+function decrypt () {
+  openssl aes-256-cbc -d -a -in "$1" -out "${1%.aes256cbc}"  
+}
+
 function man2pdfnew () { # Output man as pdf
   if [ ! $(echo $(man -w "$1" 2>&1) | grep -c "No manual entry for") -ge "1" ]; then
     cat `man -w $1`|gunzip|groff -mandoc|open -f -a Preview
