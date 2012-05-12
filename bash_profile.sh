@@ -23,17 +23,11 @@ export COLOR_LIGHT_GRAY='\033[0;37m'
 source ~/.bashrc
 
 # show a greeter on startup
-myname=`uname -sr`
-if [ ${#myname} -gt 18 ]; then
-        myname=`uname -sr | cut -c 1-17`'..'
-fi
- 
-# Initial Display
 echo '> '`uptime`
-echo '> '$myname
+echo '> '`uname -sr`
 echo " "
 
-# Notes: ----------------------------------------------------------
+# Notes: 
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:
 #     profile
