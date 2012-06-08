@@ -183,7 +183,7 @@ function hidehomedirs () {
     var="${var#"${var%%[![:space:]]*}"}"
     var="${var%"${var##*[![:space:]]}"}"
 
-    if [ $var -eq 1 ] || [ "$i" == "Library" ] || [ "$i" == "Desktop" ];then
+    if [ $var -eq 1 ] || [ "$i" == "Library" ] || [ "$i" == "Desktop" ] || [ "$i" == "Music" ] || [ "$i" == "Public" ];then
       chflags hidden ~/"$i"
     else
       chflags nohidden ~/"$i"
@@ -191,24 +191,9 @@ function hidehomedirs () {
   done
 }
 
-function hidepublicfolder () {
-  var=`find ~/Public/Drop\ Box/ -not -name .localized -not -name .DS_Store|wc -l`
-  var="${var#"${var%%[![:space:]]*}"}"
-  var="${var%"${var##*[![:space:]]}"}"
-  if [ $var -eq 1 ];then
-    var=`find ~/Public -not -name .localized -not -name .DS_Store -not -name .com.apple.timemachine.supported|wc -l`
-    var="${var#"${var%%[![:space:]]*}"}"
-    var="${var%"${var##*[![:space:]]}"}"
-    if [ $var -eq 2 ];then
-      chflags hidden ~/Public/
-    fi
-  fi
-}
-
 # And run it directly
 mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
 hidehomedirs
-hidepublicfolder
 
 ### Mac Specific Aliases
 alias ls='ls -G'      # color the ls output
