@@ -195,6 +195,35 @@ function hidehomedirs () {
 mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
 hidehomedirs
 
+# A function to search for filenames that could make problems on windows
+function check_filenames () {
+  searchpath=`pwd`
+  #echo "Name enthält *"
+  find "$searchpath" -name "*\**"       2>/dev/null
+  #echo "Name enthält >"
+  find "$searchpath" -name "*\>*"       2>/dev/null
+  #echo "Name enthält <"
+  find "$searchpath" -name "*\<*"       2>/dev/null
+  #echo "Name enthält :"
+  find "$searchpath" -name "*:*"        2>/dev/null
+  #echo "Name enthält /"
+  find "$searchpath" -name "*/*"        2>/dev/null
+  #echo "Name enthält \\"
+  find "$searchpath" -name "*\\\\*"     2>/dev/null
+  #echo "Name enthält \""
+  find "$searchpath" -name "*\"*"       2>/dev/null
+  #echo "Name enthält |"
+  find "$searchpath" -name "*|*"        2>/dev/null
+  #echo "Name enthält ?"
+  find "$searchpath" -name "*\?*"       2>/dev/null
+  #echo "Name endet in Space"    
+  find "$searchpath" -name "* "         2>/dev/null
+  #echo "Order endet in ."
+  find "$searchpath" -type d -name '*.' 2>/dev/null
+  #echo "Dateiname beginnt mit ."
+  find "$searchpath" -name "\.*" -not -name ".DS_Store"       2>/dev/null
+}
+
 ### Mac Specific Aliases
 alias ls='ls -G'      # color the ls output
 alias ll='ls -GFlash' # shortcut for detailed listing
