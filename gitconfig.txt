@@ -1,6 +1,6 @@
 [user]
 	name = Bernhard Seeger
-	email = madeupemailaddress@example.com
+	email = frostrubin@gmail.com
 
 [core]
         excludesfile = /Users/bernhard/.gitignore
