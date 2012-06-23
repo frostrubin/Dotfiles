@@ -224,6 +224,25 @@ function check_filenames () {
   find "$searchpath" -name "\.*" -not -name ".DS_Store"       2>/dev/null
 }
 
+function screenshot {
+filename="/Users/bernhard/Desktop/Screen Shot"$(date "+%Y-%m-%d at %I.%M.%S %p")".png"
+
+if [ "$1" == "" ]; then
+\less <<END
+Use space to toggle between window and selection mode.
+Press space while in selection mode to move the region around.
+Use the parameter wait to wait 3 seconds before making a full screenshot.
+Use the parameter noshadow to have no shadow in window mode.
+END
+  screencapture -i "$filename"
+elif [ "$1" == "wait" ]; then
+  echo -n "1";sleep 1;echo -n "  2";sleep 1;echo -n "  3"; sleep 1
+  screencapture "$filename"
+elif [ "$1" == "noshadow" ]; then
+  screencapture -io "$filename"
+fi
+}
+
 ### Mac Specific Aliases
 alias ls='ls -G'      # color the ls output
 alias ll='ls -GFlash' # shortcut for detailed listing
