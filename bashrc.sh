@@ -109,7 +109,7 @@ function openon () {   # Show open files on a Volume, that prevent it form umoun
 function ppdirs () { # Copy Folder Structure from external drive
   if [ -d /Volumes/GoFlex ]; then
     echo "Creating ppdirlist"
-    rsync -a -f"+ */" -f"- *" /Volumes/GoFlex ~/Desktop/ppdirs/
+    find /Volumes/GoFlex -name "*.*" > ~/Desktop/ppdirs.txt
   else
     echo "Doing nothing"
   fi
