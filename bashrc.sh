@@ -251,7 +251,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 
 ### General Aliases
-alias cds="cd;clear;ls;"       # Go home an clear screen
+alias cds="cd;clear;hidehomedirs;ls;"       # Go home an clear screen
 alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
