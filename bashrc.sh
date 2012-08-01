@@ -243,6 +243,12 @@ elif [ "$1" == "noshadow" ]; then
 fi
 }
 
+function terminal-notifier {
+  pushd ~/Applications/Terminal\ Notifier.app/Contents/MacOS/ > /dev/null
+  ./terminal-notifier "$@"
+  popd > /dev/null
+}
+
 ### Mac Specific Aliases
 alias ls='ls -G'      # color the ls output
 alias ll='ls -GFlash' # shortcut for detailed listing
