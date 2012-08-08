@@ -178,6 +178,7 @@ function parse_git_branch {
 
 ### Mac Specific Functions ###
 function hidehomedirs () {
+  mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
   for i in $(ls ~);do
     var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats|wc -l`
     var="${var#"${var%%[![:space:]]*}"}"
@@ -192,7 +193,6 @@ function hidehomedirs () {
 }
 
 # And run it directly
-mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
 hidehomedirs
 
 # A function to search for filenames that could make problems on windows
