@@ -184,7 +184,12 @@ function hidehomedirs () {
     var="${var#"${var%%[![:space:]]*}"}"
     var="${var%"${var##*[![:space:]]}"}"
 
-    if [ $var -eq 1 ] || [ "$i" == "Library" ] || [ "$i" == "Desktop" ] || [ "$i" == "Music" ] || [ "$i" == "Public" ];then
+    if [ $var -eq 1 ] || 
+       [ "$i" == "Library" ] || 
+       [ "$i" == "Desktop" ] || 
+       [ "$i" == "Music" ] || 
+       [ "$i" == "Public" ] || 
+       [ "$i" == "Doktorarbeit" ];then
       chflags hidden ~/"$i"
     else
       chflags nohidden ~/"$i"
