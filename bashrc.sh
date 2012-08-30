@@ -81,7 +81,7 @@ function decrypt () {
 
 function man2pdfnew () { # Output man as pdf
   if [ ! $(echo $(man -w "$1" 2>&1) | grep -c "No manual entry for") -ge "1" ]; then
-    cat `man -w $1`|gunzip|groff -mandoc|open -f -a Preview
+    man -t "$1"|open -f -a Preview
   else
     echo "No manual entry for" "$1"
   fi
