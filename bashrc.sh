@@ -229,6 +229,17 @@ function check_filenames () {
   find "$searchpath" -name "\.*" -not -name ".DS_Store"       2>/dev/null
 }
 
+function topng () {
+  [ "$#" -eq 0 ] && (echo "You have to specify at least 1 file"; exit 1)
+  for var in "$@"; do 
+    FILENAME=`echo ${var##*/}`;
+    EXT=`echo ${var##*.}`
+    NOEXT=`echo ${FILENAME%\.*}`
+    sips -s format png "$var" --out "$NOEXT".png
+    sips -i "$NOEXT".png
+  done
+}
+
 function screenshot {
 filename="/Users/bernhard/Desktop/Screen Shot"$(date "+%Y-%m-%d at %I.%M.%S %p")".png"
 
