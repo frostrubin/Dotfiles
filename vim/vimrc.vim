@@ -35,10 +35,15 @@ filetype indent on
 filetype plugin on
 filetype plugin indent on
  
-set autoindent
-" copy previous indent on enter 
-set copyindent
-set smartindent
+
+set expandtab       "Use softtabstop spaces instead of tab characters for indentation
+set shiftwidth=2    "Indent by 4 spaces when using >>, <<, == etc.
+set softtabstop=2   "Indent by 4 spaces when pressing <TAB>
+set copyindent      " copy previous indent on enter 
+set autoindent      "Keep indentation from previous line
+set smartindent     "Automatically inserts indentation in some cases
+set cindent         "Like smartindent, but stricter and more customisable
+
 
 " toggle paste mode (to paste properly indented text)
 " you can hit F2 to temporarily suspend auto-indenting
@@ -67,6 +72,10 @@ set nowb
 
 " use jj to quickly escape to normal mode while typing 
 inoremap jj <ESC>
+
+" use ii to quickly re-ident the whole file
+inoremap ii <ESC>gg=G
+
 
 " Start Pathogen
 call pathogen#infect()
