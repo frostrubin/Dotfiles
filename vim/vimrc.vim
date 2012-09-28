@@ -1,5 +1,10 @@
 " Most Tips are from Luke:
 " http://www.terminally-incoherent.com/blog/2012/03/26/how-to-configure-vim/
+" This setup contains - amongst other things
+"   the L9 Library           http://www.vim.org/scripts/script.php?script_id=3252
+"   the AutoComplPop Plugin  http://www.vim.org/scripts/script.php?script_id=1879
+"
+
 " break compatibility with vi
 set nocompatible
 
