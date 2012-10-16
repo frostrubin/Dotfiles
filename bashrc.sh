@@ -229,6 +229,14 @@ function check_filenames () {
   find "$searchpath" -name "\.*" -not -name ".DS_Store"       2>/dev/null
 }
 
+function activateCmdClick() {
+  ps x|grep 'CmdClic[k]' > /dev/null 2>&1
+  [[ $? -ne 0 ]] && $(CmdClick > /dev/null 2>&1 &)
+}
+
+# And run it directly
+activateCmdClick
+
 function topng () {
   [ "$#" -eq 0 ] && (echo "You have to specify at least 1 file"; exit 1)
   for var in "$@"; do 
@@ -267,7 +275,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 
 ### General Aliases
-alias cds="cd;clear;hidehomedirs;ls;"       # Go home an clear screen
+alias cds="cd;clear;hidehomedirs;activateCmdClick;ls;"       # Go home an clear screen
 alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
