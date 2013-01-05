@@ -115,6 +115,26 @@ function ppdirs () { # Copy Folder Structure from external drive
   fi
 }
 
+function camera_clean() {
+  file_path="/Users/bernhard/Dropbox/Camera Uploads/" # With a / at the end!
+
+  SAVEIFS=$IFS
+  IFS=$(echo -en "\n\b")
+  for f in $(ls $file_path ); do
+    if [ "${f:0:4}" != "Icon" ]; then
+      if [ "${f:4:1}" == "-" ] && 
+         [ "${f:7:1}" == "-" ]; then
+        oldname="$file_path$f"
+        replace=$(echo "$f" | sed 's/-/./1' | sed 's/-/./1' )
+        newname="$file_path$replace"
+        echo "$oldname"
+        mv "$oldname" "$newname"
+      fi
+    fi 
+  done
+  IFS=$SAVEIFS
+}
+
 tips(){ # Selection of bash tips to make it easier to remember them
 \less  <<END
 Completion:
