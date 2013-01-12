@@ -292,6 +292,7 @@ alias ls='ls -G'      # color the ls output
 alias ll='ls -GFlash' # shortcut for detailed listing
 alias less='less -IR' # better less
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias my="my_helpers.sh"
 
 
 ### General Aliases
