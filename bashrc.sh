@@ -5,7 +5,7 @@ export EDITOR=nano
 ### Check directories and add existing to $PATH
   for dir in \
           ~/Scripts \
-          ~/.functions/ \
+          ~/.functions \
           ~/.functions/mupdf05 \
           ~/.functions/ImageMagick-6.6.4/bin \
 #          /usr/bin \
