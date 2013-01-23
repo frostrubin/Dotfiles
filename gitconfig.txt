@@ -4,3 +4,5 @@
 
 [core]
         excludesfile = /Users/bernhard/.gitignore
+[push]
+	default = simple
