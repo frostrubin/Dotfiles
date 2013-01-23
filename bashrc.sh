@@ -14,6 +14,9 @@ export EDITOR=nano
   done
 
 
+# Source special git functions
+source ~/.git-prompt.sh
+
 ### Basic bash settings  
 export HISTCONTROL=erasedups          # Erase duplicates
 export HISTSIZE=5000                  # Big history
@@ -165,15 +168,6 @@ on a paticular command.
 END
 }
 
-
-function parse_git_branch {
-  currentbranch=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ ${#currentbranch} -gt 0 ];then
-    echo -ne "$currentbranch "
-  fi
-}
-
-
 # Prompt with current git branch
   # The \[ and \] brackets around the colors are very important!
   # Not for the actual color display (it works without them) but for the terminal.app
@@ -181,7 +175,7 @@ function parse_git_branch {
   # Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
   long_prompt='$(status=$?;
   echo -ne "\[${COLOR_BLUE}\]";
-  parse_git_branch;
+  __git_ps1 "%s ";
   echo -ne "\[${COLOR_NC}\]";
   if [[ $status = 0 ]]; then 
     echo -ne "\[${COLOR_GREEN}\]:)"; 
@@ -208,8 +202,7 @@ function hidehomedirs () {
        [ "$i" == "Library" ] || 
        [ "$i" == "Desktop" ] || 
        [ "$i" == "Music" ] || 
-       [ "$i" == "Public" ] || 
-       [ "$i" == "Doktorarbeit" ];then
+       [ "$i" == "Public" ];then
       chflags hidden ~/"$i"
     else
       chflags nohidden ~/"$i"
