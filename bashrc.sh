@@ -46,10 +46,6 @@ function octal () {   # ls with permissions in octal from
    ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
-function pythonserver() {
-  python -m SimpleHTTPServer 8080
-}
-
 function cd () { # Far superior cd. cd ........ is possible
    local -ri n=${#*};
    if [ $n -eq 0 -o -d "${!n}" -o "${!n}" == "-" ]; then
@@ -109,34 +105,6 @@ function openon () {   # Show open files on a Volume, that prevent it form umoun
   lsof +D "$1" 2>/dev/null
 }
 
-function ppdirs () { # Copy Folder Structure from external drive
-  if [ -d /Volumes/GoFlex ]; then
-    echo "Creating ppdirlist"
-    find /Volumes/GoFlex -name "*.*" > ~/Desktop/ppdirs.txt
-  else
-    echo "Doing nothing"
-  fi
-}
-
-function camera_clean() {
-  file_path="/Users/bernhard/Dropbox/Camera Uploads/" # With a / at the end!
-
-  SAVEIFS=$IFS
-  IFS=$(echo -en "\n\b")
-  for f in $(ls $file_path ); do
-    if [ "${f:0:4}" != "Icon" ]; then
-      if [ "${f:4:1}" == "-" ] && 
-         [ "${f:7:1}" == "-" ]; then
-        oldname="$file_path$f"
-        replace=$(echo "$f" | sed 's/-/./1' | sed 's/-/./1' )
-        newname="$file_path$replace"
-        echo "$oldname"
-        mv "$oldname" "$newname"
-      fi
-    fi 
-  done
-  IFS=$SAVEIFS
-}
 
 tips(){ # Selection of bash tips to make it easier to remember them
 \less  <<END
@@ -259,25 +227,6 @@ function topng () {
     sips -s format png "$var" --out "$NOEXT".png
     sips -i "$NOEXT".png
   done
-}
-
-function screenshot {
-filename="/Users/bernhard/Desktop/Screen Shot"$(date "+%Y-%m-%d at %I.%M.%S %p")".png"
-
-if [ "$1" == "" ]; then
-\less <<END
-Use space to toggle between window and selection mode.
-Press space while in selection mode to move the region around.
-Use the parameter wait to wait 3 seconds before making a full screenshot.
-Use the parameter noshadow to have no shadow in window mode.
-END
-  screencapture -i "$filename"
-elif [ "$1" == "wait" ]; then
-  echo -n "1";sleep 1;echo -n "  2";sleep 1;echo -n "  3"; sleep 1
-  screencapture "$filename"
-elif [ "$1" == "noshadow" ]; then
-  screencapture -io "$filename"
-fi
 }
 
 ### Mac Specific Aliases
