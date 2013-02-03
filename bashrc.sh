@@ -93,7 +93,7 @@ function create () {   # Easier script creation
     touch $1
     chmod +x $1
     if [ "${1#*.}" == "sh" ];then
-      echo -e "#!/bin/bash" >> $1
+      echo -e "#!/bin/bash\n" >> $1
     elif [ "${1#*.}" == "html" ] || [ "${1#*.}" == "htm" ];then
       echo -e '<html>\n<head>\n<style type="text/css">\n\n</style>\n</head>\n<body>\n\n</body>\n</html>' >> $1
     fi
