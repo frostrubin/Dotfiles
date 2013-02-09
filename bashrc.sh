@@ -51,20 +51,6 @@ function cd () { # Far superior cd. cd ........ is possible
    fi
 }
 
-function pdfcleandir () {
-   SAVEIFS=$IFS
-   IFS=$(echo -en "\n\b")
-   for i in `ls ./*.pdf`;do
-      echo Versuche "$i" zu entsichern
-      pdfclean "$i" ${i%\.*}_entsichert.pdf
-      if [ "$1" == "-d" ];then
-         echo Versuche Original zu lšschen
-         rm -f "$i"
-      fi
-   done
-   IFS=$SAVEIFS
-}
-
 function encrypt () {
   openssl aes-256-cbc -a -in "$1" -out "$1".aes256cbc  
 }
