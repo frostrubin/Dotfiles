@@ -35,7 +35,7 @@ shopt -s checkwinsize                 # Check window size after each command
 
 ### Generic System independent Functions ###
 hf(){ # Search history. Very! Useful!
-  grep "$@" ~/.bash_history
+  grep "$@" ~/.bash_history|uniq
 }
 
 function octal () {   # ls with permissions in octal from
