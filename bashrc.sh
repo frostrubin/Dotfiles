@@ -4,13 +4,12 @@ export EDITOR=nano
 
 ### Check directories and add existing to $PATH
   for dir in \
-    ~/Scripts \
-    ~/.functions \
-    ~/.functions/mupdf05 \
-  do
-    [ -d "${dir}" ] && PATH="${PATH}:${dir}"
+          ~/Scripts \
+          ~/.functions \
+#          /usr/bin \  # This commented entry is important
+	  do
+	  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
   done
-
 
 # Source special git functions
 source ~/.git-prompt.sh

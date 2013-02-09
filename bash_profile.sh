@@ -22,7 +22,7 @@ export COLOR_LIGHT_GRAY='\033[0;37m'
 
 source ~/.bashrc
 
-cd; ls; 
+clear; cd; ls; 
 
 # Notes: 
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
