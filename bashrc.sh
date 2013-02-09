@@ -241,5 +241,3 @@ alias untar="tar xvzf"         # untar
 alias cp_folder="cp -Rpv"      # cp -R, preserving security and dates
 alias top='top -o cpu'         # Sort top by CPU
 alias m2='man2pdfnew'          # Shortcut for manpages
-alias ostype='echo ${OSTYPE//[0-9.]/}' #Platform Name
-
