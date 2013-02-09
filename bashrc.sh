@@ -132,35 +132,6 @@ function hidehomedirs () {
 # And run it directly
 hidehomedirs
 
-# A function to search for filenames that could make problems on windows
-function check_filenames () {
-  searchpath=`pwd`
-  #echo "Name enthält *"
-  find "$searchpath" -name "*\**"       2>/dev/null
-  #echo "Name enthält >"
-  find "$searchpath" -name "*\>*"       2>/dev/null
-  #echo "Name enthält <"
-  find "$searchpath" -name "*\<*"       2>/dev/null
-  #echo "Name enthält :"
-  find "$searchpath" -name "*:*"        2>/dev/null
-  #echo "Name enthält /"
-  find "$searchpath" -name "*/*"        2>/dev/null
-  #echo "Name enthält \\"
-  find "$searchpath" -name "*\\\\*"     2>/dev/null
-  #echo "Name enthält \""
-  find "$searchpath" -name "*\"*"       2>/dev/null
-  #echo "Name enthält |"
-  find "$searchpath" -name "*|*"        2>/dev/null
-  #echo "Name enthält ?"
-  find "$searchpath" -name "*\?*"       2>/dev/null
-  #echo "Name endet in Space"    
-  find "$searchpath" -name "* "         2>/dev/null
-  #echo "Order endet in ."
-  find "$searchpath" -type d -name '*.' 2>/dev/null
-  #echo "Dateiname beginnt mit ."
-  find "$searchpath" -name "\.*" -not -name ".DS_Store"       2>/dev/null
-}
-
 function activateCmdClick() {
   ps x|grep 'CmdClic[k]' > /dev/null 2>&1
   [[ $? -ne 0 ]] && $(CmdClick > /dev/null 2>&1 &)
