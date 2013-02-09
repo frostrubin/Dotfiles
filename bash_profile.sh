@@ -1,5 +1,5 @@
 # Start up TotalTerminal
-open -a "TotalTerminal"
+open -a "TotalTerminal" &
 
 # Setup some colors to use later in interactive shell or scripts
 export COLOR_NC='\033[0m' # No Color
@@ -22,10 +22,7 @@ export COLOR_LIGHT_GRAY='\033[0;37m'
 
 source ~/.bashrc
 
-# show a greeter on startup
-echo '> '`uptime`
-echo '> '`uname -sr`
-echo " "
+cd; ls; 
 
 # Notes: 
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
