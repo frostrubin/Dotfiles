@@ -87,36 +87,6 @@ function openon () {   # Show open files on a Volume, that prevent it form umoun
 }
 
 
-tips(){ # Selection of bash tips to make it easier to remember them
-\less  <<END
-Completion:
-~<tab><tab>  # User names
-@<tab><tab>  # Hosts (think ssh)
-$<tab><tab>  # Variables
-
-Edit Control:
-Ctrl-a       # Move to the start of the line.
-Ctrl-e       # Move to the end of the line.
-Ctrl-u       # Delete from the cursor to the beginning of the line.
-Ctrl-k       # Delete from the cursor to the end of the line.
-Ctrl-y       # Pastes text from the clipboard.
-Ctrl-l       # Clear the screen leaving the current line at the top of the screen.
-Ctrl-_       # Undo the last changes.
-Alt-r        # Undo all changes to the line.
-
-!!           # Execute last command in history
-!abc         # Execute last command in history beginning with abc
-!abc:p       # Print last command in history beginning with abc
-!n           # Execute nth command in history
-!$           # Last argument of last command
-!^           # First argument of last command
-^abc^xyz     # Replace first occurance of abc with xyz in last command and execute it
-
-And bash has a built in 'help', type 'help' for a listing commands and 'help cmd' for help
-on a paticular command.
-END
-}
-
 # Prompt with current git branch
   # The \[ and \] brackets around the colors are very important!
   # Not for the actual color display (it works without them) but for the terminal.app
