@@ -32,8 +32,6 @@ bind "set show-all-if-ambiguous On"   # show list automatically, without
 bind "set bell-style none"            # no bell
 shopt -s checkwinsize                 # Check window size after each command
 
-# Create a small gollum server
-#gollum --port 43879 --host 127.0.0.1 /pub/Scripts/command_wiki/ > /dev/null 2>&1 &
 
 ### Generic System independent Functions ###
 hf(){ # Search history. Very! Useful!
