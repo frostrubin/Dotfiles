@@ -1,5 +1,4 @@
 #### Generic BASH Setting ####
-
 export EDITOR=nano
 
 ### Check directories and add existing to $PATH
@@ -20,24 +19,20 @@ export HISTSIZE=5000                  # Big history
 export HISTFILESIZE=5000              # Big history
 shopt -s histappend                   # Append history continuously
 #export HISTIGNORE="ls:cd:[bf]g:exit" # Ignore ls, cd, exit, etc
-export HISTCONTROL="ignoreboth"       # ignore duplicate lines or lines
-                                      # or lines starting with a space
-bind 'set match-hidden-files off'     # if you cd [tab][tab], no hidden
-                                      # files will be recommended.
-                                      # Only if you cd .[tab][tab]
+export HISTCONTROL="ignoreboth"       # Ignore duplicate lines or lines starting with a space
+bind 'set match-hidden-files off'     # Hidden files are only recommended on .[tab][tag], not [tab][tab]
 #bind "set completion-ignore-case on" # Ignore case on completion  
-bind "set show-all-if-ambiguous On"   # show list automatically, without
-                                      # double tab
-bind "set bell-style none"            # no bell
+bind "set show-all-if-ambiguous On"   # Show list automatically, without double tab
+bind "set bell-style none"            # No bell
 shopt -s checkwinsize                 # Check window size after each command
 
 
 ### Generic System independent Functions ###
-hf(){ # Search history. Very! Useful!
+hf(){ # Search history.
   grep "$@" ~/.bash_history|uniq
 }
 
-function octal () {   # ls with permissions in octal from
+function octal () { # ls with permissions in octal form
    ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
@@ -60,26 +55,20 @@ function decrypt () {
 }
 
 function man2pdfnew () { # Output man as pdf
-  if [ ! $(echo $(man -w "$1" 2>&1) | grep -c "No manual entry for") -ge "1" ]; then
-    man -t "$1"|open -f -a Preview
-  else
-    echo "No manual entry for" "$1"
-  fi
+  [[ $(man "$1") ]] || return;
+  man -t "$1"|open -f -a Preview
 }
 
 function create () {   # Easier script creation
-  if [ "$1" == "" ]; then
-    echo "Please supply a filename"
-  else
-    touch "$1"
-    chmod +x "$1"
-    if [ "${1#*.}" == "sh" ];then
-      echo -e "#!/bin/bash\n" >> "$1"
-    elif [ "${1#*.}" == "html" ] || [ "${1#*.}" == "htm" ];then
-      echo -e '<html>\n<head>\n<style type="text/css">\n\n</style>\n</head>\n<body>\n\n</body>\n</html>' >> "$1"
-    fi
-    open "$1"
+  [[ "$#" -eq 0 ]] && return;
+  touch "$1"
+  chmod +x "$1"
+  if [ "${1#*.}" == "sh" ];then
+    echo -e "#!/bin/bash\n" >> "$1"
+  elif [ "${1#*.}" == "html" ] || [ "${1#*.}" == "htm" ];then
+    echo -e '<html>\n<head>\n<style type="text/css">\n\n</style>\n</head>\n<body>\n\n</body>\n</html>' >> "$1"
   fi
+  open "$1"
 }
 
 function openon () {   # Show open files on a Volume, that prevent it form umount
@@ -113,11 +102,9 @@ function openon () {   # Show open files on a Volume, that prevent it form umoun
 function hidehomedirs () {
   mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
   for i in $(ls ~);do
-    var=`find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats|wc -l`
-    var="${var#"${var%%[![:space:]]*}"}"
-    var="${var%"${var##*[![:space:]]}"}"
+    var=$(find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats|tail -n +2)
 
-    if [ $var -eq 1 ] || 
+    if [ "$var" == "" ] || 
        [ "$i" == "Library" ] || 
        [ "$i" == "Desktop" ] || 
        [ "$i" == "Music" ] || 
@@ -141,7 +128,7 @@ function activateCmdClick() {
 activateCmdClick
 
 function topng () {
-  [ "$#" -eq 0 ] && (echo "You have to specify at least 1 file"; exit 1)
+  [ "$#" -eq 0 ] && echo "You have to specify at least 1 file";
   for var in "$@"; do 
     FILENAME=`echo ${var##*/}`;
     EXT=`echo ${var##*.}`
@@ -164,6 +151,5 @@ alias cds="cd;clear;hidehomedirs;activateCmdClick;ls;"       # Go home an clear 
 alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
-alias cp_folder="cp -Rpv"      # cp -R, preserving security and dates
 alias top='top -o cpu'         # Sort top by CPU
 alias m2='man2pdfnew'          # Shortcut for manpages
