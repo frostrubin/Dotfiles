@@ -1,7 +1,7 @@
 # Start up TotalTerminal
 open -a "TotalTerminal" &
 
-# Setup some colors to use later in interactive shell or scripts
+# Setup some colors
 export COLOR_NC='\033[0m' # No Color
 export COLOR_WHITE='\033[1;37m'
 export COLOR_BLACK='\033[0;30m'
@@ -24,13 +24,12 @@ source ~/.bashrc
 
 clear; cd; ls; 
 
-# Notes: 
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:
 #     profile
 #     bashrc
 #     .bash_profile
-#     .bashrc (only because this file is run (sourced) in .bash_profile)
+#     .bashrc (only because this file is sourced in .bash_profile)
 #
 # When an interactive shell, that is not a login shell, is started 
 # (when you run "bash" from inside a shell, or when you start a shell in 
