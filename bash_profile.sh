@@ -1,5 +1,5 @@
 # Start up TotalTerminal
-open -a "TotalTerminal" &
+#open -a "TotalTerminal" &
 
 # Setup some colors
 export COLOR_NC='\033[0m' # No Color

@@ -144,6 +144,8 @@ alias ll='ls -GFlash' # shortcut for detailed listing
 alias less='less -IR' # better less
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="my_helpers.sh"
+alias c='open -a "Google Chrome"'
+alias ff='open -a "Firefox"'
 
 
 ### General Aliases
