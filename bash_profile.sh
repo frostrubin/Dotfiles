@@ -1,6 +1,3 @@
-# Start up TotalTerminal
-#open -a "TotalTerminal" &
-
 # Setup some colors
 export COLOR_NC='\033[0m' # No Color
 export COLOR_WHITE='\033[1;37m'
@@ -22,7 +19,7 @@ export COLOR_LIGHT_GRAY='\033[0;37m'
 
 source ~/.bashrc
 
-clear; cd; ls; 
+cds 
 
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:
