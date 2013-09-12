@@ -135,4 +135,5 @@ alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
 alias top='top -o cpu'         # Sort top by CPU
-alias m2='man2pdf'          # Shortcut for manpages
+alias m2='man2pdf'             # Shortcut for manpages
+alias pyserv='python -m SimpleHTTPServer 8080'
