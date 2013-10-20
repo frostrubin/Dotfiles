@@ -67,6 +67,14 @@ function create () {   # Easier script creation
   open "$1"
 }
 
+function cleanup() { # Remove unwanted files from current folder
+  find . -name "*.sfv" -exec rm -rf {} \;
+  find . -name "*.nfo" -exec rm -rf {} \;
+  find . -type d -name "Sample" -exec rm -rf {} \;
+  find . -name "Thumbs.db" -exec rm -rf {} \;
+  find . -name "filename.txt" -exec rm -rf {} \;
+}
+
 # Prompt with current git branch
   # The \[ and \] brackets around the colors are very important!
   # Not for the actual color display (it works without them) but for the terminal.app
