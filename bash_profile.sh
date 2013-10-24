@@ -19,7 +19,7 @@ export COLOR_LIGHT_GRAY='\033[0;37m'
 
 source ~/.bashrc
 
-cds 
+clear;cd;ls 
 
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:
