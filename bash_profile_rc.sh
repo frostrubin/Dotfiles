@@ -92,7 +92,7 @@ function create () {   # Easier script creation
 }
 
 function fillGitIgnore() {
-  echo -ne "*.DS_Store\n*.swp\n*.privatei" > ~/.gitignore
+  echo -ne "*.DS_Store\n*.swp\n*.private" > ~/.gitignore
 }
 
 function cleanup() { # Remove unwanted files from current folder
