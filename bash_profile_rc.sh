@@ -91,6 +91,10 @@ function create () {   # Easier script creation
   open "$1"
 }
 
+function fillGitIgnore() {
+  echo -ne "*.DS_Store\n*.swp\n*.privatei" > ~/.gitignore
+}
+
 function cleanup() { # Remove unwanted files from current folder
   find . -name "*.sfv" -exec rm -rf {} \;
   find . -name "*.nfo" -exec rm -rf {} \;
