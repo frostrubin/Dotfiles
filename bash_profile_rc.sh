@@ -147,7 +147,7 @@ function activateCmdClick() {
   [[ $? -ne 0 ]] && $(CmdClick > /dev/null 2>&1 &)
 }
 
-function topng () {
+function topng() {
   [ "$#" -eq 0 ] && echo "You have to specify at least 1 file";
   for var in "$@"; do 
     FILENAME=`echo ${var##*/}`;
@@ -156,6 +156,29 @@ function topng () {
     sips -s format png "$var" --out "$NOEXT".png
     sips -i "$NOEXT".png
   done
+}
+
+function ppdirs() {
+  find /Volumes/GoFlex |sed '/GoFlex\/\./d' > ~/Desktop/ppdirs.txt
+}
+
+function camclean() {
+  file_path="/Users/bernhard/Dropbox/Camera Uploads/" # With a / at the end!
+  SAVEIFS=$IFS
+  IFS=$(echo -en "\n\b")
+  for f in $(ls $file_path ); do
+    if [ "${f:0:4}" != "Icon" ]; then
+      if [ "${f:4:1}" == "-" ] && 
+         [ "${f:7:1}" == "-" ]; then
+        oldname="$file_path$f"
+        replace=$(echo "$f" | sed 's/-/./1' | sed 's/-/./1' )
+        newname="$file_path$replace"
+        echo "$oldname"
+        mv "$oldname" "$newname"
+      fi
+    fi 
+  done
+  IFS=$SAVEIFS
 }
 
 ### Mac Specific Aliases
