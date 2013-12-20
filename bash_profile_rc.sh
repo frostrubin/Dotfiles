@@ -35,7 +35,7 @@ export EDITOR=nano
   done
 
 # Source special git functions
-source ~/.git-prompt.sh
+#source ~/.git-prompt.sh
 
 ### Basic bash settings  
 export HISTCONTROL=erasedups          # Erase duplicates
@@ -108,16 +108,11 @@ function cleanup() { # Remove unwanted files from current folder
   # Not for the actual color display (it works without them) but for the terminal.app
   # to know that colors are being printed.
   # Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
-  long_prompt='$(status=$?;
-  echo -ne "\[${COLOR_BLUE}\]";
-  __git_ps1 "%s ";
-  echo -ne "\[${COLOR_NC}\]";
-  if [[ $status = 0 ]]; then 
-    echo -ne "\[${COLOR_GREEN}\]:)"; 
-  else 
-    echo -ne "\[${COLOR_RED}\]:("; 
-  fi;
-  echo -ne "\[${COLOR_NC}\]";)'
+##  long_prompt='$(status=$?;
+##  echo -ne "\[${COLOR_BLUE}\]";
+##  __git_ps1 "%s ";
+##  echo -ne "\[${COLOR_NC}\]";
+  long_prompt='$([[ $? = 0 ]] && echo -ne "\[${COLOR_GREEN}\]:)" || echo -ne "\[${COLOR_RED}\]:("; echo -ne "\[${COLOR_NC}\]";)'
 
   PS1="\W $long_prompt "
 
