@@ -1,8 +1,0 @@
-[user]
-	name = Bernhard Seeger
-	email = frostrubin@gmail.com
-
-[core]
-        excludesfile = /Users/bernhard/.gitignore
-[push]
-	default = simple

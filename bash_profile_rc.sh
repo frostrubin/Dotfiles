@@ -115,6 +115,13 @@ function hidehomedirs () {
   done
 }
 
+function configureGit() {
+  echo -ne "*.DS_Store\n*.swp\n*.private" > ~/.gitignore
+  git config --global user.name "Bernhard Seeger"
+  git config --global user.email "frostrubin@gmail.com"
+  git config --global core.excludesfile "/Users/bernhard/.gitignore"
+}
+
 function activateCmdClick() {
   ps x|grep 'CmdClic[k]' > /dev/null 2>&1
   [[ $? -ne 0 ]] && $(CmdClick > /dev/null 2>&1 &)
@@ -169,4 +176,3 @@ alias untar="tar xvzf"         # untar
 alias top='top -o cpu'         # Sort top by CPU
 alias m2='man2pdf'             # Shortcut for manpages
 alias pyserv='python -m SimpleHTTPServer 8080'
-alias fillGitIgnore='echo -ne "*.DS_Store\n*.swp\n*.private" > ~/.gitignore'
