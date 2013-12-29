@@ -120,6 +120,7 @@ function configureGit() {
   git config --global user.name "Bernhard Seeger"
   git config --global user.email "frostrubin@gmail.com"
   git config --global core.excludesfile "/Users/bernhard/.gitignore"
+  git config --global push.default simple
 }
 
 function activateCmdClick() {
