@@ -13,17 +13,7 @@
 # I am using this by having two symlinks for .bashrc and .bash_profile
 # point to the same file
 
-#### Do not show the line with the last login
-touch ~/.hushlogin
-
-#### Setup some colors
-export COLOR_NC='\033[0m' # No Color
-export COLOR_BLUE='\033[0;34m'
-export COLOR_GREEN='\033[0;32m'
-export COLOR_RED='\033[0;31m'
-
-#### Generic BASH Settings ####
-export EDITOR=nano
+touch ~/.hushlogin # Do not show the line with the last login
 
 ### Check directories and add existing to $PATH
   for dir in \
@@ -34,10 +24,8 @@ export EDITOR=nano
 	  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
   done
 
-# Source special git functions
-#source ~/.git-prompt.sh
-
-### Basic bash settings  
+### Basic bash settings
+export EDITOR=nano
 export HISTCONTROL=erasedups          # Erase duplicates
 export HISTSIZE=5000                  # Big history
 export HISTFILESIZE=5000              # Big history
@@ -49,7 +37,6 @@ bind 'set match-hidden-files off'     # Hidden files are only recommended on .[t
 bind "set show-all-if-ambiguous On"   # Show list automatically, without double tab
 bind "set bell-style none"            # No bell
 shopt -s checkwinsize                 # Check window size after each command
-
 
 ### Generic System independent Functions ###
 function octal () { # ls with permissions in octal form
@@ -91,33 +78,24 @@ function create () {   # Easier script creation
   open "$1"
 }
 
-function fillGitIgnore() {
-  echo -ne "*.DS_Store\n*.swp\n*.private" > ~/.gitignore
-}
-
 function cleanup() { # Remove unwanted files from current folder
   find . -name "*.sfv" -exec rm -rf {} \;
   find . -name "*.nfo" -exec rm -rf {} \;
   find . -type d -name "Sample" -exec rm -rf {} \;
   find . -name "Thumbs.db" -exec rm -rf {} \;
+export EDITOR=nano
   find . -name "filename.txt" -exec rm -rf {} \;
 }
 
-# Prompt with current git branch
-  # The \[ and \] brackets around the colors are very important!
-  # Not for the actual color display (it works without them) but for the terminal.app
-  # to know that colors are being printed.
-  # Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
-##  long_prompt='$(status=$?;
-##  echo -ne "\[${COLOR_BLUE}\]";
-##  __git_ps1 "%s ";
-##  echo -ne "\[${COLOR_NC}\]";
-  long_prompt='$([[ $? = 0 ]] && echo -ne "\[${COLOR_GREEN}\]:)" || echo -ne "\[${COLOR_RED}\]:("; echo -ne "\[${COLOR_NC}\]";)'
+# The \[ and \] brackets around the colors are very important!
+# Not for the actual color display (it works without them) but for the terminal.app
+# to know that colors are being printed.
+# Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
+long_prompt='$([[ $? = 0 ]] && echo -ne "\[\033[0;32m\]:)" || echo -ne "\[\033[0;31m\]:("; echo -ne "\[\033[0m\]";)'
 
-  PS1="\W $long_prompt "
-
-  # Together with shopt histappend, this makes the bash history available
-  export PROMPT_COMMAND="history -a; history -c; history -r"
+PS1="\W $long_prompt "
+# Together with shopt histappend, this makes the bash history available
+export PROMPT_COMMAND="history -a; history -c; history -r"
 
 ### Mac Specific Functions ###
 function hidehomedirs () {
@@ -191,3 +169,4 @@ alias untar="tar xvzf"         # untar
 alias top='top -o cpu'         # Sort top by CPU
 alias m2='man2pdf'             # Shortcut for manpages
 alias pyserv='python -m SimpleHTTPServer 8080'
+alias fillGitIgnore='echo -ne "*.DS_Store\n*.swp\n*.private" > ~/.gitignore'
