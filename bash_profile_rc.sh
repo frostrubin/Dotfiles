@@ -20,8 +20,8 @@ touch ~/.hushlogin # Do not show the line with the last login
           ~/Scripts \
           ~/.functions \
 #          /usr/bin \  # This commented entry is important
-	  do
-	  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
+    do
+    [ -d "${dir}" ] && PATH="${PATH}:${dir}"
   done
 
 ### Basic bash settings
@@ -123,11 +123,6 @@ function configureGit() {
   git config --global push.default simple
 }
 
-function activateCmdClick() {
-  ps x|grep 'CmdClic[k]' > /dev/null 2>&1
-  [[ $? -ne 0 ]] && $(CmdClick > /dev/null 2>&1 &)
-}
-
 function topng() {
   [ "$#" -eq 0 ] && echo "You have to specify at least 1 file";
   for var in "$@"; do 
@@ -170,7 +165,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="my_helpers.sh"
 
 ### General Aliases
-alias cds="cd;hidehomedirs;activateCmdClick;clear;ls;" # Go home an clear screen
+alias cds="cd;hidehomedirs;clear;ls;" # Go home an clear screen
 alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
