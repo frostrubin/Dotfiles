@@ -19,9 +19,10 @@ touch ~/.hushlogin # Do not show the line with the last login
   for dir in \
           ~/Scripts \
           ~/.functions \
+          ~/gsutil \
 #          /usr/bin \  # This commented entry is important
-    do
-    [ -d "${dir}" ] && PATH="${PATH}:${dir}"
+	  do
+	  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
   done
 
 ### Basic bash settings
@@ -103,11 +104,12 @@ function hidehomedirs () {
   for i in $(ls ~);do
     var=$(find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats -not -name .com.apple.timemachine.supported|tail -n +2)
 
-    if [ "$var" == "" ] || 
+    if [ "$var" == "" ]      || 
        [ "$i" == "Library" ] || 
        [ "$i" == "Desktop" ] || 
-       [ "$i" == "Music" ] || 
-       [ "$i" == "Public" ];then
+       [ "$i" == "Music" ]   || 
+       [ "$i" == "gsutil" ]  ||
+       [ "$i" == "Public" ]; then
       chflags hidden ~/"$i"
     else
       chflags nohidden ~/"$i"
@@ -139,7 +141,7 @@ function ppdirs() {
 }
 
 function camclean() {
-  file_path="/Users/bernhard/Dropbox/Camera Uploads/" # With a / at the end!
+  file_path="/Users/bernhard/Dropbox/Camera Uploads/" # Slash at the end!
   SAVEIFS=$IFS
   IFS=$(echo -en "\n\b")
   for f in $(ls $file_path ); do
@@ -165,7 +167,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="my_helpers.sh"
 
 ### General Aliases
-alias cds="cd;hidehomedirs;clear;ls;" # Go home an clear screen
+alias cds="cd;hidehomedirs;clear;ls" # Go home an clear screen
 alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
