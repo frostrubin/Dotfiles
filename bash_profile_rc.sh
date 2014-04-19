@@ -117,12 +117,10 @@ function hidehomedirs () {
   done
 }
 
-function configureGit() {
-  echo -ne "*.DS_Store\n*.swp\n*.private" > ~/.gitignore
-  git config --global user.name "Bernhard Seeger"
-  git config --global user.email "frostrubin@gmail.com"
-  git config --global core.excludesfile "/Users/bernhard/.gitignore"
-  git config --global push.default simple
+function gitclone() {
+  if [ "$1" != "" ]; then
+    open "github-mac://openRepo/$1"
+  fi
 }
 
 function topng() {
