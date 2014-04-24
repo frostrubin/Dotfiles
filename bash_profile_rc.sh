@@ -117,12 +117,6 @@ function hidehomedirs () {
   done
 }
 
-function gitclone() {
-  if [ "$1" != "" ]; then
-    open "github-mac://openRepo/$1"
-  fi
-}
-
 function topng() {
   [ "$#" -eq 0 ] && echo "You have to specify at least 1 file";
   for var in "$@"; do 
