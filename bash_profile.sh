@@ -1,38 +1,27 @@
-# When you start an interactive shell (log in, open new Terminal Tab in OS X)
+# When you open new Terminal Tab in OS X
 # the following files are read and run, in this order:
 #     profile
 #     bashrc
 #     .bash_profile
 #     .bashrc (only if you source the file in .bash_profile)
 #
-# When an interactive shell, that is not a login shell, is started 
-# (when you run "bash" from inside a shell) the order is as follows:
+# When you run "bash" from inside a shell, the order is:
 #     bashrc
 #     .bashrc
-#
-# I am using this by having two symlinks for .bashrc and .bash_profile
-# point to the same file
 
 touch ~/.hushlogin # Do not show the line with the last login
 
 ### Check directories and add existing to $PATH
-  for dir in \
-          ~/Scripts \
-          ~/.functions \
-          ~/gsutil \
-#          /usr/bin \  # This commented entry is important
-	  do
-	  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
+  for dir in ~/Unix ~/gsutil ;do
+    [ -d "${dir}" ] && PATH="${PATH}:${dir}"
   done
 
 ### Basic bash settings
 export EDITOR=nano
 export HISTCONTROL=erasedups          # Erase duplicates
 export HISTSIZE=5000                  # Big history
-export HISTFILESIZE=5000              # Big history
 shopt -s histappend                   # Append history continuously
 #export HISTIGNORE="ls:cd:[bf]g:exit" # Ignore ls, cd, exit, etc
-export HISTCONTROL="ignoreboth"       # Ignore duplicate lines or lines starting with a space
 bind 'set match-hidden-files off'     # Hidden files are only recommended on .[tab][tag], not [tab][tab]
 #bind "set completion-ignore-case on" # Ignore case on completion  
 bind "set show-all-if-ambiguous On"   # Show list automatically, without double tab
@@ -54,23 +43,13 @@ function cd () { # Far superior cd. cd ........ is possible
    fi
 }
 
-function encrypt () {
-  openssl aes-256-cbc -a -in "$1" -out "$1".aes256cbc  
-}
-
-function decrypt () {
-  openssl aes-256-cbc -d -a -in "$1" -out "${1%.aes256cbc}"  
-}
-
 function man2pdf () {
-  [[ $(man "$1") ]] || return;
-  man -t "$1"|open -f -a Preview
+  [[ $(man "$1") ]] || return; man -t "$1"|open -f -a Preview
 }
 
-function create () {   # Easier script creation
+function create () {
   [[ "$#" -eq 0 ]] && return;
-  touch "$1"
-  chmod +x "$1"
+  touch "$1"; chmod +x "$1"
   if [ "${1#*.}" == "sh" ];then
     echo -e "#!/usr/bin/env bash\n" >> "$1"
   elif [ "${1#*.}" == "html" ];then
@@ -84,14 +63,12 @@ function cleanup() { # Remove unwanted files from current folder
   find . -name "*.nfo" -exec rm -rf {} \;
   find . -type d -name "Sample" -exec rm -rf {} \;
   find . -name "Thumbs.db" -exec rm -rf {} \;
-export EDITOR=nano
   find . -name "filename.txt" -exec rm -rf {} \;
 }
 
-# The \[ and \] brackets around the colors are very important!
-# Not for the actual color display (it works without them) but for the terminal.app
-# to know that colors are being printed.
-# Otherwise, Terminal navigation (ctrl+a, ctrl+e) does not work properly!
+# The \[ and \] brackets around the colors are needed to signal the Terminal.app
+# that colors are being printed. Without them, color display still works but
+# Terminal navigation (ctrl+a, ctrl+e) is broken.
 long_prompt='$([[ $? = 0 ]] && echo -ne "\[\033[0;32m\]:)" || echo -ne "\[\033[0;31m\]:("; echo -ne "\[\033[0m\]";)'
 
 PS1="\W $long_prompt "
@@ -100,9 +77,8 @@ export PROMPT_COMMAND="history -a; history -c; history -r"
 
 ### Mac Specific Functions ###
 function hidehomedirs () {
-  mv -f ~/Pictures/iPod\ Photo\ Cache ~/.Trash/iPodPhotoCache`date "+%Y%m%d%H%M%S"`/ > /dev/null 2>&1
   for i in $(ls ~);do
-    var=$(find  ~/"$i" -maxdepth 1 -not -name .localized -not -name .DS_Store -not -name iChats -not -name .com.apple.timemachine.supported|tail -n +2)
+    var=$(find  ~/"$i" -maxdepth 1 ! -name .localized ! -name .DS_Store ! -name .com.apple.timemachine.supported|tail -n +2)
 
     if [ "$var" == "" ]      || 
        [ "$i" == "Library" ] || 
@@ -118,10 +94,9 @@ function hidehomedirs () {
 }
 
 function topng() {
-  [ "$#" -eq 0 ] && echo "You have to specify at least 1 file";
+  [ "$#" -eq 0 ] && echo "Please specify at least 1 file";
   for var in "$@"; do 
     FILENAME=`echo ${var##*/}`;
-    EXT=`echo ${var##*.}`
     NOEXT=`echo ${FILENAME%\.*}`
     sips -s format png "$var" --out "$NOEXT".png
     sips -i "$NOEXT".png
@@ -159,7 +134,7 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="my_helpers.sh"
 
 ### General Aliases
-alias cds="cd;hidehomedirs;clear;ls" # Go home an clear screen
+alias cds="cd;hidehomedirs;clear" # Go home an clear screen
 alias grep='grep --color=auto' # colored grep
 alias ducks='du -cksh *'       # folders and files sizes in current folder
 alias untar="tar xvzf"         # untar
