@@ -78,13 +78,16 @@ export PROMPT_COMMAND="history -a; history -c; history -r"
 ### Mac Specific Functions ###
 function hidehomedirs () {
   for i in $(ls ~);do
-    var=$(find  ~/"$i" -maxdepth 1 ! -name .localized ! -name .DS_Store ! -name .com.apple.timemachine.supported|tail -n +2)
+    var=$(find  ~/"$i" -maxdepth 1 ! -name .localized ! -name .DS_Store ! -name .com.apple.timemachine.supported \
+          ! -name .parallels-vm-directory|tail -n +2)
 
-    if [ "$var" == "" ]      || 
-       [ "$i" == "Library" ] || 
-       [ "$i" == "Desktop" ] || 
-       [ "$i" == "Music" ]   || 
-       [ "$i" == "gsutil" ]  ||
+    if [ "$var" == "" ]          || 
+       [ "$i" == "Library" ]     || 
+       [ "$i" == "Desktop" ]     || 
+       [ "$i" == "Music" ]       || 
+       [ "$i" == "gsutil" ]      ||
+       [ "$i" == "Windows.pvm" ] ||
+       [ "$i" == "bin" ]         ||
        [ "$i" == "Public" ]; then
       chflags hidden ~/"$i"
     else
