@@ -12,9 +12,9 @@
 touch ~/.hushlogin # Do not show the line with the last login
 
 ### Check directories and add existing to $PATH
-  for dir in ~/Unix ~/gsutil ;do
-    [ -d "${dir}" ] && PATH="${PATH}:${dir}"
-  done
+for dir in ~/Unix ~/gsutil ;do
+  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
+done
 
 ### Basic bash settings
 export EDITOR=nano
@@ -135,6 +135,7 @@ alias ll='ls -GFlash' # shortcut for detailed listing
 alias less='less -IR' # better less
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="my_helpers.sh"
+alias bm="~/Books/1_BookManager.php"
 
 ### General Aliases
 alias cds="cd;hidehomedirs;clear" # Go home an clear screen
