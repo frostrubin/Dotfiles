@@ -12,7 +12,7 @@
 touch ~/.hushlogin # Do not show the line with the last login
 
 ### Check directories and add existing to $PATH
-for dir in ~/Unix ~/gsutil ;do
+for dir in ~/s3cmd ~/dummy ;do
   [ -d "${dir}" ] && PATH="${PATH}:${dir}"
 done
 
@@ -30,17 +30,17 @@ shopt -s checkwinsize                 # Check window size after each command
 
 ### Generic System independent Functions ###
 function octal () { # ls with permissions in octal form
-   ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print}'
+  ls -la | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
 function cd () { # Far superior cd. cd ........ is possible
-   local -ri n=${#*};
-   if [ $n -eq 0 -o -d "${!n}" -o "${!n}" == "-" ]; then
-      builtin cd "$@";
-   else
-      local e="s:\.\.\.:../..:g";
-      builtin cd "${@:1:$n-1}" $(sed -e$e -e$e -e$e <<< "${!n}");
-   fi
+  local -ri n=${#*};
+  if [ $n -eq 0 -o -d "${!n}" -o "${!n}" == "-" ]; then
+    builtin cd "$@";
+  else
+    local e="s:\.\.\.:../..:g";
+    builtin cd "${@:1:$n-1}" $(sed -e$e -e$e -e$e <<< "${!n}");
+  fi
 }
 
 function man2pdf () {
@@ -85,7 +85,7 @@ function hidehomedirs () {
        [ "$i" == "Library" ]     || 
        [ "$i" == "Desktop" ]     || 
        [ "$i" == "Music" ]       || 
-       [ "$i" == "gsutil" ]      ||
+       [ "$i" == "s3cmd" ]       ||
        [ "$i" == "Windows.pvm" ] ||
        [ "$i" == "bin" ]         ||
        [ "$i" == "Public" ]; then
@@ -107,7 +107,7 @@ function topng() {
 }
 
 function ppdirs() {
-  find /Volumes/GoFlex |sed '/GoFlex\/\./d' > ~/Desktop/ppdirs.txt
+  find /Volumes/SmallFlex |sed '/GoFlex\/\./d' > ~/.ppdirs.txt; echo "New ~/.ppdirs.txt was created."
 }
 
 function camclean() {
@@ -137,12 +137,13 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="~/.my_helpers.sh"
 alias bm="~/Books/1_BookManager.php"
 alias opent="open -a 'Sublime Text 2'"
+alias setup.py="echo Overwritten via alias in .bash_profile"
 
 ### General Aliases
 alias cds="cd;hidehomedirs;clear" # Go home an clear screen
-alias grep='grep --color=auto' # colored grep
-alias ducks='du -cksh *'       # folders and files sizes in current folder
-alias untar="tar xvzf"         # untar
-alias top='top -o cpu'         # Sort top by CPU
-alias m2='man2pdf'             # Shortcut for manpages
+alias grep='grep --color=auto'    # colored grep
+alias ducks='du -cksh *'          # folders and files sizes in current folder
+alias untar="tar xvzf"            # untar
+alias top='top -o cpu'            # Sort top by CPU
+alias m2='man2pdf'                # Shortcut for manpages
 alias pyserv='python -m SimpleHTTPServer 8080'
