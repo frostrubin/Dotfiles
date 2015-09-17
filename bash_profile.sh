@@ -23,7 +23,6 @@ export HISTSIZE=5000                  # Big history
 shopt -s histappend                   # Append history continuously
 #export HISTIGNORE="ls:cd:[bf]g:exit" # Ignore ls, cd, exit, etc
 bind 'set match-hidden-files off'     # Hidden files are only recommended on .[tab][tag], not [tab][tab]
-#bind "set completion-ignore-case on" # Ignore case on completion  
 bind "set show-all-if-ambiguous On"   # Show list automatically, without double tab
 bind "set bell-style none"            # No bell
 shopt -s checkwinsize                 # Check window size after each command
@@ -85,8 +84,6 @@ function hidehomedirs () {
        [ "$i" == "Library" ]     || 
        [ "$i" == "Desktop" ]     || 
        [ "$i" == "Music" ]       || 
-       [ "$i" == "s3cmd" ]       ||
-       [ "$i" == "Windows.pvm" ] ||
        [ "$i" == "bin" ]         ||
        [ "$i" == "Public" ]; then
       chflags hidden ~/"$i"
@@ -107,7 +104,7 @@ function topng() {
 }
 
 function ppdirs() {
-  find /Volumes/SmallFlex |sed '/GoFlex\/\./d' > ~/.ppdirs.txt; echo "New ~/.ppdirs.txt was created."
+  find /Volumes/SmallFlex |sed '/SmallFlex\/\./d' > ~/.ppdirs.txt; echo "New ~/.ppdirs.txt was created."
 }
 
 function camclean() {
@@ -135,7 +132,7 @@ alias ll='ls -GFlash' # shortcut for detailed listing
 alias less='less -IR' # better less
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="~/.my_helpers.sh"
-alias bm="~/Books/1_BookManager.php"
+alias cbm="~/.cloud_book_manager.php"
 alias opent="open -a 'Sublime Text 2'"
 alias setup.py="echo Overwritten via alias in .bash_profile"
 
