@@ -9,12 +9,13 @@
 #     bashrc
 #     .bashrc
 
-touch ~/.hushlogin # Do not show the line with the last login
+touch ~/.hushlogin             # Do not show the line with the last login
+touch ~/.bash_sessions_disable # OS X El Capitan Feature. See /etc/bashrc_Apple_Terminal for details 
 
 ### Check directories and add existing to $PATH
-for dir in ~/s3cmd ~/dummy ;do
-  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
-done
+#for dir in ~/s3cmd ~/dummy ;do
+#  [ -d "${dir}" ] && PATH="${PATH}:${dir}"
+#done
 
 ### Basic bash settings
 export EDITOR=nano
@@ -53,6 +54,8 @@ function create () {
     echo -e "#!/usr/bin/env bash\n" >> "$1"
   elif [ "${1#*.}" == "html" ];then
     echo -e '<html>\n<head>\n<style type="text/css">\n\n</style>\n</head>\n<body>\n\n</body>\n</html>' >> "$1"
+  elif [ "${1#*.}" == "py" ];then
+    echo -e "#!/usr/bin/env python\n" >> "$1"
   fi
   open "$1"
 }
@@ -72,23 +75,23 @@ long_prompt='$([[ $? = 0 ]] && echo -ne "\[\033[0;32m\]:)" || echo -ne "\[\033[0
 
 PS1="\W $long_prompt "
 # Together with shopt histappend, this makes the bash history available
-export PROMPT_COMMAND="history -a; history -c; history -r"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a; history -c; history -r"
 
 ### Mac Specific Functions ###
 function hidehomedirs () {
-  for i in $(ls ~);do
-    var=$(find  ~/"$i" -maxdepth 1 ! -name .localized ! -name .DS_Store ! -name .com.apple.timemachine.supported \
+  for i in $(ls -d ~/*);do
+    var=$(find  "$i" -maxdepth 1 ! -name .localized ! -name .DS_Store ! -name .com.apple.timemachine.supported \
           ! -name .parallels-vm-directory|tail -n +2)
-
-    if [ "$var" == "" ]          || 
-       [ "$i" == "Library" ]     || 
-       [ "$i" == "Desktop" ]     || 
-       [ "$i" == "Music" ]       || 
-       [ "$i" == "bin" ]         ||
-       [ "$i" == "Public" ]; then
-      chflags hidden ~/"$i"
+    base=$(basename "$i")
+    if [ "$var" == "" ]             || 
+       [ "$base" == "Library" ]     || 
+       [ "$base" == "Desktop" ]     || 
+       [ "$base" == "Music" ]       || 
+       [ "$base" == "bin" ]         ||
+       [ "$base" == "Public" ]; then
+      chflags hidden "$i"
     else
-      chflags nohidden ~/"$i"
+      chflags nohidden "$i"
     fi
   done
 }
@@ -133,8 +136,7 @@ alias less='less -IR' # better less
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias my="~/.my_helpers.sh"
 alias cbm="~/.cloud_book_manager.php"
-alias opent="open -a 'Sublime Text 2'"
-alias setup.py="echo Overwritten via alias in .bash_profile"
+alias sublime="open -a 'Sublime Text 2'"
 
 ### General Aliases
 alias cds="cd;hidehomedirs;clear" # Go home an clear screen
